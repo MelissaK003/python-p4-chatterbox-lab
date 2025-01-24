@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-
 from random import choice as rc
-
 from faker import Faker
+from datetime import datetime
 
 from app import app
 from models import db, Message
@@ -14,7 +13,6 @@ if "Duane" not in usernames:
     usernames.append("Duane")
 
 def make_messages():
-
     Message.query.delete()
     
     messages = []
@@ -23,6 +21,8 @@ def make_messages():
         message = Message(
             body=fake.sentence(),
             username=rc(usernames),
+            created_at=datetime.now(),  
+            updated_at=datetime.now()   
         )
         messages.append(message)
 
